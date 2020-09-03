@@ -9,13 +9,16 @@ const Contract = require('web3-eth-contract')
 const host = config.networks.development.host
 const port = config.networks.development.port
 
-const addr1 = config.address.addr1
-const addr2 = config.address.addr2
+const user1 = config.account.addr1
+const user2 = config.account.addr2
 
 const web3 = new Web3(`http://${host}:${port}`)
 
-const contract = new web3.eth.Contract(MyERC721JSON.abi, config.address.contract2, {
-    from: addr1
+// web3.eth.personal.unlockAccount(user1.address, user1.pwd, 600)
+// web3.eth.personal.unlockAccount(user2.address, user1.pwd, 600)
+
+const contract = new web3.eth.Contract(MyERC721JSON.abi, config.contract.contract2, {
+    from: user1.address
 });
 
 contract.methods.name().call((err, data) => {
@@ -28,12 +31,12 @@ contract.methods.symbol().call((err, data) => {
     console.log('symbol: ' + data)
 })
 
-contract.methods.balanceOf(addr1).call((err, data) => {
+contract.methods.balanceOf(user1.address).call((err, data) => {
     if (err) return console.log(err);
     console.log('addr1 balance: '+ data)
 })
 
-contract.methods.balanceOf(addr2).call((err, data) => {
+contract.methods.balanceOf(user2.address).call((err, data) => {
     if (err) return console.log(err);
     console.log('addr2 balance: '+ data)
 })
