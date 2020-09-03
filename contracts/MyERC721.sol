@@ -5,7 +5,7 @@ pragma solidity ^0.6.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract MyERC721 is ERC721 {
-    constructor() ERC721("YAAA", "YA") public {
+    constructor(string memory name, string memory symbol) ERC721(name, symbol) public {
     }
 
     function mintUniqueTokenTo(
